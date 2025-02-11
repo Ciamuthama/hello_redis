@@ -1,0 +1,28 @@
+
+<div id="notifications"></div>
+
+<% if user_signed_in? && current_user.admin?  %>
+  <p>Welcome, Admin!</p>
+  <%= link_to 'Manage Users', admin_users_path %>
+ <%= link_to 'Edit Profile', edit_user_registration_path, data: { turbo: false } %>
+  <%= link_to 'Create Post', new_post_path, data: { turbo: false } %>
+  <%= link_to 'View Posts', posts_path, data: { turbo: false } %>
+<% end %>
+
+
+<% if current_user.moderator? %>
+  <p>Moderators can edit posts!</p>
+  <%= link_to 'Edit Profile', edit_user_registration_path, data: { turbo: false } %>
+  <%= link_to 'Create Post', new_post_path, data: { turbo: false } %>
+  <%= link_to 'View Posts', posts_path, data: { turbo: false } %>
+
+<% end %>
+
+<% if current_user.user? %>
+  <p>Welcome, regular user!</p>
+  <%= link_to 'View Posts', posts_path, data: { turbo: false } %>
+<% end %>
+
+
+<%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false } %>
+

@@ -1,0 +1,13 @@
+<% if @post %>
+  <h1><%= @post.title %></h1>
+  <p><%= @post.content %></p>
+<% if current_user.moderator? | current_user.admin? %>
+  <a href="<%= edit_post_path(@post) %>">Edit Post</a> 
+  <%= button_to 'Delete Post', @post, method: :delete, data: { turbo_confirm: 'Are you sure?' } %>
+<%end%>
+
+<% else %>
+  <p>Post not found</p>
+<% end %>
+
+<a href="<%= posts_path %>">Back to Posts</a>

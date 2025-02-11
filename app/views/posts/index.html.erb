@@ -1,0 +1,14 @@
+<h1>All posts</h1>
+<% if current_user.moderator? | current_user.admin? %>
+<%= link_to 'New Post', new_post_path %>
+
+<% end %>
+
+<ul style="list-style-type:none;">
+    <% @posts.each do |post| %>
+    <li style="font-weight:600;text-transform:uppercase;"><%= post.title %></li>
+    <li><%= post.content %></li>
+    <li><%= link_to 'Details', post_path(post) %></li>
+    <% end %>
+</ul>
+<%= link_to 'home', profile_path %>
